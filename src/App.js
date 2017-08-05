@@ -15,6 +15,15 @@ class BooksApp extends React.Component {
     })
   }
 
+  moveBook = (book, shelf) => {
+    book.shelf = shelf
+    console.log(shelf)
+    this.setState((state) => ({
+      books: state.books.filter((e) => e.id !== book.id).concat(book)
+    }))
+    BooksAPI.update(book, shelf)
+  }
+
   render() {
     return (
       <div className="app">
@@ -42,7 +51,7 @@ class BooksApp extends React.Component {
         )}/>
         <Route exact path="/" render={ () => (
           <div>
-            <ListBooks books={this.state.books} />
+            <ListBooks books={this.state.books} onMove={this.moveBook} />
             <div className="open-search">
               <Link to="/search">Add a book</Link>
             </div>
