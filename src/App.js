@@ -25,7 +25,7 @@ class BooksApp extends React.Component {
   }
 
   searchBooks = (query) => {
-    var trimmedQuery = query.trim()
+    const trimmedQuery = query.trim()
     if (trimmedQuery !== '') {
       BooksAPI.search(trimmedQuery, 20).then((books) => {
         if (books instanceof Array ) {
