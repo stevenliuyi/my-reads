@@ -27,10 +27,18 @@ class BooksApp extends React.Component {
 
   searchBooks = (query) => {
     const trimmedQuery = query.trim()
+    const bookIDs = this.state.books.map((book) => book.id)
     if (trimmedQuery !== '') {
-      BooksAPI.search(trimmedQuery, 20).then((books) => {
-        if (books instanceof Array ) {
-          this.setState({searchResults: books})
+      BooksAPI.search(trimmedQuery, 20).then((results) => {
+        if (results instanceof Array ) {
+          // check if any of the results already exist
+          for (const i in results) {
+            const index = bookIDs.indexOf(results[i].id)
+            if ( index > -1) {
+              results[i].shelf = this.state.books[index].shelf
+            } 
+          }
+          this.setState({searchResults: results})
         } else {
           this.setState({searchResults: []})
         }
