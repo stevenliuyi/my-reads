@@ -1,25 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Book from './Book'
-
-class Shelf extends React.Component {
-  render() {
-    return (
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{ this.props.title }</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            { this.props.books.map((book) => (
-              <Book book={ book } onMove={ this.props.onMove }/>
-            )) }
-          </ol>
-        </div>
-      </div>
-    )
-  }
-  
-}
+import Shelf from './Shelf'
 
 class ListBooks extends React.Component {
   static propTypes = {
