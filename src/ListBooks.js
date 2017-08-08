@@ -1,31 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-
-class Book extends React.Component {
-  render() {
-    return (
-      <li>
-        <div className="book">
-          <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + this.props.book.imageLinks.thumbnail + ')' }}></div>
-            <div className="book-shelf-changer">
-              <select defaultValue={ ('shelf' in this.props.book) ? this.props.book.shelf : 'none' } onChange={(e) => this.props.onMove(this.props.book, e.target.value)}>
-                <option value="none" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
-            </div>
-          </div>
-          <div className="book-title">{ this.props.book.title }</div>
-          <div className="book-authors">{ this.props.book.authors }</div>
-        </div>
-      </li>
-    )
-  }
-}
+import Book from './Book'
 
 class Shelf extends React.Component {
   render() {
@@ -90,22 +66,4 @@ class ListBooks extends React.Component {
   }
 }
 
-class ListSearchResults extends React.Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired,
-    onMove: PropTypes.func.isRequired
-  }
-
-  render() {
-    return (
-      <ol className="books-grid">
-        { this.props.books.length !==0 && this.props.books.map( (book) => (
-          <Book book={ book } onMove={ this.props.onMove } />
-        ))}
-      </ol>
-    )
-  }  
-}
-
 export default ListBooks
-export { ListSearchResults }
